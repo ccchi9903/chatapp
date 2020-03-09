@@ -29,7 +29,13 @@ io.on('connection', function(socket)
 	});
 });
 
-http.listen(8080, '0.0.0.0', function()
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
+
+http.listen(port, '0.0.0.0', function()
 {
 	console.log("Listening on port 8080...");
 })
