@@ -16,14 +16,19 @@ app.get("/secret", function(req,res)
 	res.send("You found the secret page!!");
 });
 
+let numberusers = 0;
+let names = [];
 io.on('connection', function(socket)
 {
-	//socket.emit("Hello", "world");
+	numberusers += 1;
 	socket.username = "anonymous";
 	socket.on("set username", function(username)
 	{
 		socket.username = username;
+		names.push(username);
+		console.log(names);
 		io.emit("Connected", socket.username);
+		io.emit("Users", {"numberusers": numberusers, "names": names});
 	});
 	socket.on('chat message', function(msg)
 	{
@@ -37,6 +42,16 @@ io.on('connection', function(socket)
 	{	
 		io.emit("disconnected", socket.username);
 		console.log(socket.username + " disconnected");
+		if(socket.username && numberusers > 0)
+		{
+			numberusers--;
+			let index = names.indexOf(socket.username);
+			if(index != -1)
+			{
+				names.splice(index, 1);
+			}
+			io.emit("Users", {"numberusers": numberusers, "names": names});
+		}
 	});
 });
 

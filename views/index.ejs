@@ -2,16 +2,7 @@
 <html>
 <head>
 	<title>Snopchat</title>
-	<style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: green; border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
+	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -20,14 +11,25 @@
 </head>
 <body>
 <div class="ui container center aligned segment basic">
+	<div class="ui four column grid">
+		<div class="row">
+			<div class="twelve wide column ui container">
+				<h1>Snopchat</h1>
+				<p id="typing">It's silent...</p>
+				<ul id="messages">
 
-	<h1>Snopchat</h1>
-	<p id="typing">It's silent...</p>
-	<ul id="messages">
-
-	</ul>
-	<p></p>
-	<p></p>
+				</ul>
+				<p></p>
+				<p></p>
+			</div>
+			<div class="four wide column sidebar">
+				<h3>Online: <span id="onlinenumber">0</span></h3>
+				<ul id="onlinenames">
+					
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
 <form action="">
 		<input type="" id="m" autocomplete="off">

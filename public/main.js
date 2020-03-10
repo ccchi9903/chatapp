@@ -20,24 +20,46 @@ $(function()
 		return false;
 	});
 	socket.on("Connected", (username) => {
+		playWow();
 		let msg = username + " has joined the chat!";
 		$('#messages').append($("<li>").text(msg));
+		
+	});
+	socket.on("Users", (data) => {
+		let number = data["numberusers"];
+		let names = data["names"];
+		resetSidebar(number, names);
 	});
 	socket.on('chat message', function(msg)
 	{
-		var audio = new Audio('/audio_file.mp3');
-		audio.play();
+		playWow();
 		$('#messages').append($("<li>").text(msg));
 		window.scrollTo(0,document.body.scrollHeight);
 	});
-	socket.on("Hello", function(data)
-	{
-		console.log(data);
-	})
 	socket.on("disconnected", function(username)
 	{
 		let leave_message = $("<li>").text(username + " has left the chat :(");
-		$('#messages').append($("<li>").text(username + " has left the chat :("));
+		playWow();
+		$('#messages').append(leave_message);
 	});
+	//set initial name and tell the server to send the "someone connected" message
 	socket.emit("set username", name);
 });
+function resetSidebar(number, names)
+{
+	$("#onlinenumber").text(number);
+	let nameList = document.getElementById("onlinenames");
+	while(nameList.lastElementChild)
+	{
+		nameList.removeChild(nameList.lastElementChild);
+	}
+	names.forEach(function(name)
+	{
+		$("#onlinenames").append($("<li>").text(name));
+	});
+}
+function playWow()
+{
+	let audio = new Audio('/audio_file.mp3');
+	audio.play();
+}
