@@ -7,11 +7,10 @@ $(function()
 	  ];
 
 	let name = prompt("Whats your name?");
-	if(name == null)
+	if(name == null || name == "")
 	{
 		name="anonymous";
 	}
-
 	var socket = io();
 	$('form').submit(function(e){
 		e.preventDefault(); //prevents page reloading
