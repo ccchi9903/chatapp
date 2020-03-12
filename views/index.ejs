@@ -1,6 +1,9 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
 	<title>Snopchat</title>
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
@@ -8,32 +11,51 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="main.js"></script>
+	
 </head>
+
 <body>
+
 <div class="ui container center aligned segment basic">
 	<div class="ui four column grid">
 		<div class="row">
-			<div class="twelve wide column ui container">
-				<h1>Snopchat</h1>
-				<p id="typing">It's silent...</p>
-				<ul id="messages">
-
-				</ul>
-				<p></p>
-				<p></p>
+		
+			<div class="two wide column">
+			
+				<img id="toggleSfxButton" onclick="toggleSfx()"></img>
+			
 			</div>
-			<div class="four wide column sidebar">
+		
+			<div class="twelve wide column ui container">
+			
+				<h1>Snopchat</h1>
+				
+				<p id="typing">It's silent...</p>
+				
+				<ul id="messages"></ul>
+				
+				<p></p>
+				<p></p>
+				
+			</div>
+			
+			<div class="two wide column sidebar">
+			
 				<h3>Online: <span id="onlinenumber">0</span></h3>
-				<ul id="onlinenames">
-					
-				</ul>
+				
+				<ul id="onlinenames"></ul>
+				
 			</div>
 		</div>
 	</div>
 </div>
+
 <form action="">
-		<input type="" id="m" autocomplete="off">
-		<button>Send</button>
-	</form>
+
+	<input type="" id="m" autocomplete="off">
+	<button>Send</button>
+	
+</form>
+
 </body>
 </html>
