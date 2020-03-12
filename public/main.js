@@ -1,3 +1,5 @@
+var sfxEnabled = false;
+
 $(function()
 {
 	
@@ -17,7 +19,7 @@ $(function()
 	});
 	
 	socket.on("Connected", (username) => {
-		playWow();
+		tryPlayWow();
 		let msg = username + " has joined the chat!";
 		$('#messages').append($("<li>").text(msg));
 		
@@ -31,7 +33,7 @@ $(function()
 	
 	socket.on('chat message', function(msg)
 	{
-		playWow();
+		tryPlayWow();
 		$('#messages').append($("<li>").text(msg));
 		window.scrollTo(0,document.body.scrollHeight);
 	});
@@ -39,7 +41,7 @@ $(function()
 	socket.on("disconnected", function(username)
 	{
 		let leave_message = $("<li>").text(username + " has left the chat :(");
-		playWow();
+		tryPlayWow();
 		$('#messages').append(leave_message);
 	});
 	
@@ -67,10 +69,28 @@ function resetSidebar(number, names)
 	
 }
 
-function playWow()
+function toggleSfx() {
+	
+	sfxEnabled = !sfxEnabled;
+	setSfxButtonState(sfxEnabled);
+	
+}
+
+/*First items are when sfx are off, second is when they are on*/
+let sfxButtonImgs = ["/volume_off.png", "/volume_on.png"];
+
+function setSfxButtonState(state) {
+	
+	$("#toggleSfxButton").src = sfxButtonImgs[state ? 1 : 0];
+	
+}
+
+function tryPlayWow()
 {
 	
-	let audio = new Audio('/audio_file.mp3');
-	audio.play();
+	if (sfxEnabled) {
+		let audio = new Audio('/audio_file.mp3');
+		audio.play();
+	}
 	
 }
