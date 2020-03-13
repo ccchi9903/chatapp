@@ -7,7 +7,7 @@ $(function()
 	{
 		name = prompt("Whats your name?");
 
-	}while(name.length > 10);
+	} while(name.length > 10);
 	
 	if(name == null || name == "")
 	{
@@ -19,6 +19,7 @@ $(function()
 		e.preventDefault(); //prevents page reloading
 		socket.emit('chat message', name + ": " + $('#m').val());
 		$('#m').val('');
+		socket.emit("stopped typing", name);
 		return false;
 	});
 
