@@ -26,7 +26,6 @@ io.on('connection', function(socket)
 	{
 		socket.username = username;
 		names.push(username);
-		console.log(names);
 		io.emit("Connected", socket.username);
 		io.emit("Users", {"numberusers": numberusers, "names": names});
 	});
@@ -36,6 +35,13 @@ io.on('connection', function(socket)
 		{
 			console.log("message: " + msg);
 			io.emit("chat message", msg);
+		}
+	});
+	socket.on("typing", function(username)
+	{
+		if(username)
+		{
+			io.emit("typing", username);
 		}
 	});
 	socket.on('disconnect', function()

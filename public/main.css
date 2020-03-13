@@ -19,7 +19,7 @@ img #toggleSfxButton {
 
 #messages { list-style-type: none; margin: 0; padding: 0; }
 #onlinenames { list-style-type: none; }
-#messages li { padding: 5px 10px; background-color: lightblue;}
+#messages li { padding: 5px 10px; /*background-color: lightblue;*/}
 #messages li:nth-child(odd) { background: #eee; }
 .sidebar{
 	background-color: yellow;
