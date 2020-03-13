@@ -81,7 +81,7 @@ let sfxButtonImgs = ["/volume_off.png", "/volume_on.png"];
 
 function setSfxButtonState(state) {
 	
-	$("#toggleSfxButton").src = sfxButtonImgs[state ? 1 : 0];
+	$("#toggleSfxButton").attr("src", sfxButtonImgs[state ? 1 : 0]);
 	
 }
 
