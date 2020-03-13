@@ -17,7 +17,9 @@ $(function()
 		$('#m').val('');
 		return false;
 	});
-	
+	$("#m").keypress(function(){
+		socket.emit("typing", name);
+	})
 	socket.on("Connected", (username) => {
 		tryPlayWow();
 		let msg = username + " has joined the chat!";
@@ -43,6 +45,10 @@ $(function()
 		let leave_message = $("<li>").text(username + " has left the chat :(");
 		tryPlayWow();
 		$('#messages').append(leave_message);
+	});
+	socket.on("typing", function(username)
+	{
+		changeTyping(username);
 	});
 	
 	//set initial name and tell the server to send the "someone connected" message
@@ -93,4 +99,27 @@ function tryPlayWow()
 		audio.play();
 	}
 	
+}
+function changeTyping(username)
+{
+	let defaultmsg = "It's silent...";
+	if(username)
+	{
+		$("#typing").text(username + " is typing...");
+	}
+	else
+	{
+		$("#typing").text(defaultmsg);
+	}
+}
+function isThisUserTyping()
+{
+	if($("#m").val() != null && $("#m").val() != "")
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
