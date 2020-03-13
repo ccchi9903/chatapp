@@ -1,5 +1,5 @@
 var sfxEnabled = false;
-
+let timeoutTyping;
 $(function()
 {
 	let name;
@@ -25,7 +25,8 @@ $(function()
 
 	$("#m").keypress(function(){
 		socket.emit("typing", name);
-		setTimeout(() => {socket.emit("stopped typing", name);}, 5000);
+		clearTimeout(timeoutTyping);
+		timeoutTyping = setTimeout(() => {socket.emit("stopped typing", name);}, 5000);
 	});
 
 	socket.on("silent", function()
