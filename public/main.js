@@ -150,3 +150,9 @@ function isThisUserTyping()
 		return false;
 	}
 }
+
+window.onload = function() {
+	
+	setSfxButtonState(sfxEnabled);
+	
+}
