@@ -2,8 +2,12 @@ var sfxEnabled = false;
 
 $(function()
 {
-	
-	let name = prompt("Whats your name?");
+	let name;
+	do
+	{
+		name = prompt("Whats your name?");
+
+	}while(name.length > 10);
 	
 	if(name == null || name == "")
 	{
@@ -17,14 +21,21 @@ $(function()
 		$('#m').val('');
 		return false;
 	});
+
 	$("#m").keypress(function(){
 		socket.emit("typing", name);
-	})
+		setTimeout(() => {socket.emit("stopped typing", name);}, 5000);
+	});
+
+	socket.on("silent", function()
+	{	
+		changeTyping(null);
+	});
+
 	socket.on("Connected", (username) => {
 		tryPlayWow();
 		let msg = username + " has joined the chat!";
-		$('#messages').append($("<li>").text(msg));
-		
+		newChatMessage(msg);
 	});
 	
 	socket.on("Users", (data) => {
@@ -36,15 +47,15 @@ $(function()
 	socket.on('chat message', function(msg)
 	{
 		tryPlayWow();
-		$('#messages').append($("<li>").text(msg));
-		window.scrollTo(0,document.body.scrollHeight);
+		changeTyping(null);
+		newChatMessage(msg);
 	});
 	
 	socket.on("disconnected", function(username)
 	{
-		let leave_message = $("<li>").text(username + " has left the chat :(");
+		let leave_message = username + " has left the chat :(";
 		tryPlayWow();
-		$('#messages').append(leave_message);
+		newChatMessage(leave_message);
 	});
 	socket.on("typing", function(username)
 	{
@@ -56,6 +67,11 @@ $(function()
 	
 });
 
+function newChatMessage(msg)
+{
+	$('#messages').append($("<li>").text(msg));
+	window.scrollTo(0,document.body.scrollHeight);//scrolls down
+}
 function resetSidebar(number, names)
 {
 	
@@ -106,12 +122,23 @@ function changeTyping(username)
 	if(username)
 	{
 		$("#typing").text(username + " is typing...");
+		$("#typing").css("color", "white");
 	}
 	else
 	{
 		$("#typing").text(defaultmsg);
+		$("#typing").css("color", "black");
+
 	}
 }
+//useless function Ive written yay
+function resetTypingIfEmpty()
+{
+	if(!isThisUserTyping()){
+		changeTyping(null);
+	}
+}
+
 function isThisUserTyping()
 {
 	if($("#m").val() != null && $("#m").val() != "")
