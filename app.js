@@ -46,7 +46,7 @@ io.on('connection', function(socket)
 			let index = typing_names.indexOf(username);
 			if(index == -1)
 			{
-				socket.brodcast.emit("typing", username);//emit to everyone else except this socket
+				socket.broadcast.emit("typing", username);//emit to everyone else except this socket
 				typing_names.push(username);
 			}
 		}
