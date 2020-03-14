@@ -56,14 +56,10 @@ form button { width: 9%; background: lightblue; border: none; padding: 10px; pad
 
 #emojiKeypadButton:hover, #emojiKeypadButton:focus { background-color: #d0d0d0; }
 
-#emojiDropup {
+#emojiKeypadDropup {
 	
 	position: relative;
 	display: inline-block;
-	
-	overflow-y: auto;
-	
-	max-height: 400px;
 	
 }
 
@@ -100,7 +96,8 @@ form button { width: 9%; background: lightblue; border: none; padding: 10px; pad
 .emojiKeypadOption:hover, .emojiKeypadOption:focus {
 	
 	background-color: #e0e0e0;
-	
+}
+
 #typing{
 	color: black; display: block; font-size: 125%; background-color: #82a43a;
 	padding-left: 5px;
