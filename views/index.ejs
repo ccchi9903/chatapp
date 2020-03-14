@@ -18,17 +18,15 @@
 </head>
 
 <body>
-<img id="toggleSfxButton" onclick="toggleSfx()" src="/volume_off.png" style="position: fixed;top: 0;left: 0;"></img>
+<img id="toggleSfxButton" onclick="toggleSfx()" src="/volume_off.png"></img>
 
-<div class="ui container center aligned segment basic">
+<div class="ui container left aligned segment basic">
 	<div class="ui four column grid">
 		<div class="row">
 
-			<div class="twelve wide column ui container">
+			<div class="twelve wide column ui container" style="border: 3px cyan solid;">
 			
-				<h1>Snopchat</h1>
-				
-				<p id="typing">It's silent...</p>
+				<h1 class="">Snopchat</h1>
 				
 				<ul id="messages"></ul>
 				
@@ -37,7 +35,7 @@
 				
 			</div>
 			
-			<div class="four wide column sidebar">
+			<div class="four wide column center aligned sidebar">
 			
 				<h3>Online: <span id="onlinenumber">0</span></h3>
 				
@@ -50,13 +48,15 @@
 
 <form action="">
 
-	<div id="emojiKeypad">
+  <span id="typing" style="color: white; display: block; font-size: 125%; background-color: #82a43a;">It's silent...</span>
+    
+  <div id="emojiKeypad">
 	
 		<p id="emojiKeypadButton" onclick="toggleEmojiKeypad()">😀</p>
 		<table id="emojiDropup"></table>
 	
 	</div>
-
+  
 	<input type="" id="m" autocomplete="off">
 	
 	<button>Send</button>
