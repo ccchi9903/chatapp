@@ -41,24 +41,10 @@ window.onload = function() {
 	
 	emojiDropup = document.getElementById("emojiDropup");
 	
-	let _emojisRoot = Math.sqrt(emojis.length);
-	let columns = Math.floor(_emojisRoot);
+	let columns = 6;
+	var rows = emojis.length / columns;
 	
-	var rows;
-	
-	if (_emojisRoot == columns) {
-		
-		rows = columns;
-		
-	}
-	else {
-		
-		var extra = emojis.length - (columns ** 2);
-		var addedRows = Math.floor(extra / columns);
-		
-		rows = columns + (addedRows * columns == extra ? addedRows : addedRows + 1);
-		
-	}
+	if (rows * columns < emojis.length) { rows++; }
 	
 	for (var row = 0; row < rows; row++) {
 		
