@@ -11,6 +11,9 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script src="main.js"></script>
+	<script src="emojiKeypadScript.js"></script>
+	
+	<meta charset="utf-8">
 	
 </head>
 
@@ -47,7 +50,15 @@
 
 <form action="">
 
+	<div id="emojiKeypad">
+	
+		<p id="emojiKeypadButton" onclick="toggleEmojiKeypad()">😀</p>
+		<table id="emojiDropup"></table>
+	
+	</div>
+
 	<input type="" id="m" autocomplete="off">
+	
 	<button>Send</button>
 	
 </form>
