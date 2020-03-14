@@ -33,6 +33,6 @@ form button { width: 9%; background: lightblue; border: none; padding: 10px; pad
 	background-color: #82a43a;
 }
 #typing{
-	color: white; display: block; font-size: 125%; background-color: #82a43a;
+	color: black; display: block; font-size: 125%; background-color: #82a43a;
 	padding-left: 5px;
 }
