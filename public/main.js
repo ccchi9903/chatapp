@@ -1,25 +1,25 @@
 var sfxEnabled = false;
 let timeoutTyping;
+let isInFocus = true;
+let messagesNotRead = 0;
+$(window).blur(function() {
+	isInFocus = false;
+});
+$(window).focus(function() {
+	isInFocus = true;
+	$("#titleNumber").text("");
+	messagesNotRead = 0;
+});
 $(function()
 {
-	let name;
-	do
-	{
-		name = prompt("Whats your name?");
-
-	} while(name.length > 10);
-	
-	if(name == null || name == "")
-	{
-		name="anonymous";
-	}
-	
-	var socket = io();
+	let name = getName(20);
+	let socket = io();
 	$('form').submit(function(e){
 		e.preventDefault(); //prevents page reloading
-		if($('#m').val() != null && $('#m').val() != "")
+		let text = $('#m').val();
+		if(text != null && text != "")
 		{
-			socket.emit('chat message', name + ": " + $('#m').val());
+			socket.emit('chat message', name + ": " + text);
 			$('#m').val('');
 			socket.emit("stopped typing", name);
 		}
@@ -54,6 +54,11 @@ $(function()
 		tryPlayWow();
 		changeTyping(null);
 		newChatMessage(msg);
+		if(!isInFocus)
+		{
+			messagesNotRead++;
+			$("title").text("Snopchat (" + messagesNotRead + ")");
+		}
 	});
 	
 	socket.on("disconnected", function(username)
@@ -71,7 +76,19 @@ $(function()
 	socket.emit("set username", name);
 	
 });
-
+function getName(max_length)
+{
+	do
+	{
+		name = prompt("Whats your name? (Max " + max_length + " characters):");
+	} while(name.length > max_length);
+	
+	if(name == null || name == "")
+	{
+		name="anonymous";
+	}
+	return name;
+}
 function newChatMessage(msg)
 {
 	$('#messages').append($("<li>").text(msg));
@@ -79,21 +96,19 @@ function newChatMessage(msg)
 }
 function resetSidebar(number, names)
 {
-	
 	$("#onlinenumber").text(number);
 	
 	let nameList = document.getElementById("onlinenames");
 	
-	while(nameList.lastElementChild)
+	while(nameList.lastElementChild)//clear the current sidebar
 	{
 		nameList.removeChild(nameList.lastElementChild);
 	}
 	
-	names.forEach(function(name)
+	names.forEach(function(name)//add all names to sidebar
 	{
 		$("#onlinenames").append($("<li>").text(name));
 	});
-	
 }
 
 function toggleSfx() {
@@ -133,8 +148,13 @@ function changeTyping(username)
 	{
 		$("#typing").text(defaultmsg);
 		$("#typing").css("color", "black");
-
 	}
+}
+
+window.onload = function() {
+	
+	setSfxButtonState(sfxEnabled);
+	
 }
 //useless function Ive written yay
 function resetTypingIfEmpty()
@@ -156,8 +176,3 @@ function isThisUserTyping()
 	}
 }
 
-window.onload = function() {
-	
-	setSfxButtonState(sfxEnabled);
-	
-}
