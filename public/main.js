@@ -17,9 +17,12 @@ $(function()
 	var socket = io();
 	$('form').submit(function(e){
 		e.preventDefault(); //prevents page reloading
-		socket.emit('chat message', name + ": " + $('#m').val());
-		$('#m').val('');
-		socket.emit("stopped typing", name);
+		if($('#m').val() != null && $('#m').val() != "")
+		{
+			socket.emit('chat message', name + ": " + $('#m').val());
+			$('#m').val('');
+			socket.emit("stopped typing", name);
+		}
 		return false;
 	});
 

@@ -62,7 +62,11 @@ io.on('connection', function(socket)
 				typing_names.splice(index, 1);
 				if(typing_names.length > 0)
 				{
-					io.emit("typing", typing_names[typing_names.length - 1]);
+					let next_typing = typing_names[typing_names.length - 1];
+					if(next_typing == socket.username)
+					{
+						socket.broadcast.emit("typing", next_typing);
+					}
 				}
 				else
 				{
