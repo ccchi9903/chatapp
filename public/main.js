@@ -7,7 +7,7 @@ $(window).blur(function() {
 });
 $(window).focus(function() {
 	isInFocus = true;
-	$("#titleNumber").text("");
+	$("title").text("");
 	messagesNotRead = 0;
 });
 $(function()
@@ -57,7 +57,7 @@ $(function()
 		if(!isInFocus)
 		{
 			messagesNotRead++;
-			$("title").text("Snopchat (" + messagesNotRead + ")");
+			$("title").text("(" + messagesNotRead + ") Snopchat");
 		}
 	});
 	
