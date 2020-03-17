@@ -1,5 +1,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font: 13px Helvetica, Arial; background-color: skyblue; }
+
 form { 
 	background: #000; 
 	padding: 3px; 
@@ -7,14 +8,20 @@ form {
 	bottom: 0; 
 	width: 100%;
 }
-form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-form button { width: 9%; background: lightblue; border: none; padding: 10px; }
 
-img #toggleSfxButton {
-	margin: 10px 10px 10px 10px;
+form input { border: 0; padding: 10px; width: 85%; margin-right: .5%; }
+form button { width: 9%; background: lightblue; border: none; padding: 10px; padding-left: 15px;}
+
+#toggleSfxButton {
+	
 	cursor: pointer;
-	width: 42px;
-	height: 42px;
+	
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	
+	width: 40px;
+	height: 40px;
 }
 
 #messages { list-style-type: none; margin: 0; padding: 0; }
@@ -26,4 +33,73 @@ img #toggleSfxButton {
 }
 .twelve{
 	background-color: #82a43a;
+}
+
+#emojiKeypad {
+	
+	position: relative;
+	display: inline-block;
+	
+	margin-right: .5%;
+	margin-left: .5%;
+	
+}
+
+#emojiKeypadButton {
+	
+	cursor: pointer;
+	background-color: #e0e0e0;
+	
+	border-radius: 5px;
+	
+}
+
+#emojiKeypadButton:hover, #emojiKeypadButton:focus { background-color: #d0d0d0; }
+
+#emojiKeypadDropup {
+	
+	position: relative;
+	display: inline-block;
+	
+}
+
+#emojiDropup {
+	
+	position: absolute;
+	bottom: 100%;
+	
+	overflow: auto;
+	
+	background-color: #404040;
+	max-height: 400px;
+	
+	z-index: 1;
+	
+	margin: 5px 5px 5px 5px;
+	
+}
+
+.emojiKeypadOption {
+	
+	width: 20px;
+	height: 20px;
+	
+	padding: 5px 5px 5px 5px;
+	
+	text-align: center;
+	
+	cursor: pointer;
+	
+	background-color: #d0d0d0;
+	
+}
+
+.emojiKeypadOption:hover, .emojiKeypadOption:focus {
+	
+	background-color: #e0e0e0;
+}
+
+#typing{
+	color: black; display: block; font-size: 125%; background-color: #82a43a;
+	padding-left: 5px;
 }

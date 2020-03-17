@@ -18,6 +18,8 @@ app.get("/secret", function(req,res)
 
 let numberusers = 0;
 let names = [];
+let typing_names = [];
+
 io.on('connection', function(socket)
 {
 	numberusers += 1;
@@ -41,7 +43,36 @@ io.on('connection', function(socket)
 	{
 		if(username)
 		{
-			io.emit("typing", username);
+			let index = typing_names.indexOf(username);
+			if(index == -1)
+			{
+				socket.broadcast.emit("typing", username);//emit to everyone else except this socket
+				typing_names.push(username);
+			}
+		}
+	});
+	socket.on("stopped typing", function(username)
+	{
+		if(username)
+		{
+			//console.log(username + "stopped typing external");
+			let index = typing_names.indexOf(username);
+			if(index != -1)
+			{
+				typing_names.splice(index, 1);
+				if(typing_names.length > 0)
+				{
+					let next_typing = typing_names[typing_names.length - 1];
+					if(next_typing == socket.username)
+					{
+						socket.broadcast.emit("typing", next_typing);
+					}
+				}
+				else
+				{
+					io.emit("silent");
+				}
+			}	
 		}
 	});
 	socket.on('disconnect', function()
