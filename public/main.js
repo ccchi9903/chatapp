@@ -7,7 +7,7 @@ $(window).blur(function() {
 });
 $(window).focus(function() {
 	isInFocus = true;
-	$("title").text("");
+	$("title").text("Snopchat");
 	messagesNotRead = 0;
 });
 $(function()
