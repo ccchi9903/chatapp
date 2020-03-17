@@ -71,6 +71,7 @@ form button { width: 9%; background: lightblue; border: none; padding: 10px; pad
 	overflow: auto;
 	
 	background-color: #404040;
+	max-height: 400px;
 	
 	z-index: 1;
 	
