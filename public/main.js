@@ -23,7 +23,7 @@ $(function()
 			$('#m').val('');
 			socket.emit("stopped typing", name);
 		}
-		return false;
+		return false; 	
 	});
 
 	$("#m").keypress(function(){
