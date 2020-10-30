@@ -7,7 +7,7 @@ $(window).blur(function() {
 });
 $(window).focus(function() {
 	isInFocus = true;
-	$("title").text("");
+	setUnreadMessages(0);
 	messagesNotRead = 0;
 });
 $(function()
@@ -57,7 +57,7 @@ $(function()
 		if(!isInFocus)
 		{
 			messagesNotRead++;
-			$("title").text("(" + messagesNotRead + ") Snopchat");
+			setUnreadMessages(messagesNotRead);
 		}
 	});
 	
@@ -176,3 +176,12 @@ function isThisUserTyping()
 	}
 }
 
+function setUnreadMessages(messages) {
+	
+	if (messages == 0) {
+		$("title").text("Snopchat");
+	} else {
+		$("title").text("(" + messages + ") Snopchat");
+	}
+	
+}

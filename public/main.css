@@ -79,10 +79,22 @@ form button { width: 9%; background: lightblue; border: none; padding: 10px; pad
 	
 }
 
+#recentEmojisTable {
+	
+	margin-bottom: 5px;
+	
+}
+
+#emojiDropupTable tr, #recentEmojisTable tr {
+	
+	max-height: 20px;
+	
+}
+
 .emojiKeypadOption {
 	
-	width: 20px;
-	height: 20px;
+	max-width: 30px;
+	min-width: 30px;
 	
 	padding: 5px 5px 5px 5px;
 	
